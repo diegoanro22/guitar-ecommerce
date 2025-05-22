@@ -1,9 +1,26 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: ['./src/**/*.{js,ts,jsx,tsx,html}', './public/index.html'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
+        background_light: 'var(--background)',
+        title: 'var(--title-color)',
+        text: 'var(--foreground)',
+      },
+      fontFamily: {
+        sans: ['var(--font-be-vietnam-pro)'],
+      },
+    },
   },
   plugins: [],
 };

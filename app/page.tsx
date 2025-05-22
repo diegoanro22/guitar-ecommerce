@@ -95,6 +95,8 @@ export default function Home() {
             width={16}
             height={16}
           />
+          <h1 className="text-primary text-sm font-bold">Guitarmania</h1>
+          <h1 className="text-secondary text-sm font-bold">Guitarmania</h1>
           Go to nextjs.org →
         </a>
       </footer>
