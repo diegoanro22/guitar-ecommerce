@@ -1,6 +1,6 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,8 +18,15 @@ const ignorePatterns = [
 
 const eslintConfig = [
   { ignores: ignorePatterns },
-  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
+    languageOptions: {
+      parser: await import('@typescript-eslint/parser'),
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
+      },
+    },
     rules: {
       // Base rules
       curly: 'error',
@@ -87,14 +94,11 @@ const eslintConfig = [
 
       // Prettier integration
       'prettier/prettier': 'error',
-    }
+    },
   },
   ...compat.config({
     extends: ['plugin:prettier/recommended'],
   }),
-
-
-
 ];
 
 export default eslintConfig;
