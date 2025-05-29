@@ -4,14 +4,16 @@ import { useParams } from 'next/navigation';
 import GuitarDetail from '@organisms/detail/GuitarDetail';
 import { guitars } from '@/app/data/guitars';
 import type { Guitar } from '@/app/types/product';
+import { useCart } from '@/app/utils/CartContext';
 
 export default function MainDetail() {
   const { id } = useParams();
   const guitarId = parseInt(id as string, 10);
   const guitar = guitars.find((g) => g.id === guitarId);
+  const { addToCart } = useCart();
 
   const handleAddToCart = (guitar: Guitar) => {
-    console.log('Agregado al carrito:', guitar.name);
+    addToCart(guitar); //
   };
 
   if (!guitar) {

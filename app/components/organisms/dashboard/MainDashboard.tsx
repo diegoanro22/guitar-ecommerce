@@ -3,11 +3,12 @@ import React from 'react';
 import GuitarList from '@organisms/dashboard/GuitarList';
 import { guitars } from '@/app/data/guitars';
 import type { Guitar } from '@/app/types/product';
+import { useCart } from '@/app/utils/CartContext';
 
 export default function MainDashboard() {
+  const { addToCart } = useCart();
   const handleAddToCart = (guitar: Guitar) => {
-    console.log('Agregado al carrito:', guitar.name);
-    // Aquí luego conectarás con el contexto o el estado global
+    addToCart(guitar); //
   };
 
   return (
