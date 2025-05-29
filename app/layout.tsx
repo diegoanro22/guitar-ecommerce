@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Be_Vietnam_Pro } from 'next/font/google';
+import { CartProvider } from '@/app/utils/CartContext';
+
 import './globals.css';
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -20,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${beVietnamPro.variable} antialiased`}>{children}</body>
+      <body className={`${beVietnamPro.variable} antialiased`}>
+        <CartProvider>{children}</CartProvider>
+      </body>
     </html>
   );
 }
