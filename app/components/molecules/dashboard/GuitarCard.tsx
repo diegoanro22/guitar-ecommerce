@@ -12,6 +12,7 @@ import StarRating from '@atoms/shared/StarRating';
 import PriceDisplay from '@atoms/dashboard/PriceDisplay';
 import { Button } from '@atoms/shared/ButtonCn';
 import type { Guitar } from '@/app/types/product';
+import { useRouter } from 'next/navigation';
 
 interface GuitarCardProps {
   guitar: Guitar;
@@ -19,8 +20,12 @@ interface GuitarCardProps {
 }
 
 const GuitarCard: React.FC<GuitarCardProps> = ({ guitar, onAddToCart }) => {
+  const router = useRouter();
   return (
-    <Card className="mx-auto w-full max-w-sm bg-white transition-shadow duration-300 hover:shadow-lg">
+    <Card
+      className="mx-auto w-full max-w-sm bg-white transition-shadow duration-300 hover:shadow-lg"
+      onClick={() => router.push(`/guitar/${guitar.id}`)}
+    >
       <CardHeader className="p-4">
         <ProductImage src={guitar.image} alt={guitar.name} />
         <CardTitle className="text-lg font-semibold text-gray-900">

@@ -43,3 +43,16 @@ export const getRecommendedGuitars = (
 
   return recommendations.slice(0, limit);
 };
+
+export const calculateRatingDistribution = (reviews: Review[]) => {
+  const total = reviews.length;
+
+  return [5, 4, 3, 2, 1].map((star) => {
+    const count = reviews.filter(
+      (review) => Math.floor(review.rating) === star,
+    ).length;
+    const percentage = total > 0 ? (count / total) * 100 : 0;
+
+    return { star, count, percentage };
+  });
+};
