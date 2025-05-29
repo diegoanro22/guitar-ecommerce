@@ -8,6 +8,7 @@ import PriceDisplay from '@atoms/dashboard/PriceDisplay';
 import RatingBreakdown from '@atoms/detail/RatingBreakdown';
 import ReviewList from '@molecules/detail/ReviewList';
 import { Button } from '@atoms/shared/ButtonCn';
+import { ArrowBigLeft } from 'lucide-react';
 
 interface Props {
   guitar: Guitar;
@@ -17,6 +18,17 @@ interface Props {
 const GuitarDetail: React.FC<Props> = ({ guitar, onAddToCart }) => {
   return (
     <div className="space-y-10">
+      <div className="flex items-center">
+        <Button
+          variant="outline"
+          className="flex items-center gap-2 text-sm hover:bg-gray-100"
+          onClick={() => window.history.back()}
+        >
+          <ArrowBigLeft className="h-5 w-5" />
+          <span>Go Back</span>
+        </Button>
+      </div>
+
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-16">
         <div>
           <ProductImage src={guitar.image} alt={guitar.name} />
@@ -28,7 +40,7 @@ const GuitarDetail: React.FC<Props> = ({ guitar, onAddToCart }) => {
           <StarRating reviews={guitar.reviews ?? []} />
           <p className="text-gray-700">{guitar.description}</p>
           <Button
-            className="bg-orange-500 text-white hover:bg-orange-600"
+            className="bg-primary text-white hover:bg-orange-600"
             onClick={() => onAddToCart(guitar)}
           >
             Add to Cart

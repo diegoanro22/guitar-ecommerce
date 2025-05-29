@@ -40,7 +40,7 @@ const GuitarCard: React.FC<GuitarCardProps> = ({ guitar, onAddToCart }) => {
       <CardFooter className="px-4 pb-4">
         <Button
           onClick={() => onAddToCart(guitar)}
-          className="w-full bg-orange-500 text-white hover:bg-orange-600"
+          className="bg-primary w-full text-white hover:bg-orange-600"
         >
           Add to Cart
         </Button>
