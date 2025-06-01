@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useEffect } from 'react';
 import type { Guitar } from '@/app/types/product';
 import ProductImage from '@atoms/dashboard/ProductImage';
 import StarRating from '@atoms/shared/StarRating';
@@ -9,6 +10,8 @@ import RatingBreakdown from '@atoms/detail/RatingBreakdown';
 import ReviewList from '@molecules/detail/ReviewList';
 import { Button } from '@atoms/shared/ButtonCn';
 import { ArrowBigLeft } from 'lucide-react';
+import RecommendedList from '@molecules/detail/RecommendedList';
+import { useNavigationHistory } from '@/app/contexts/HistoryContext';
 
 interface Props {
   guitar: Guitar;
@@ -16,6 +19,12 @@ interface Props {
 }
 
 const GuitarDetail: React.FC<Props> = ({ guitar, onAddToCart }) => {
+  const { addToHistory } = useNavigationHistory();
+
+  useEffect(() => {
+    addToHistory(guitar.id);
+  }, [guitar.id, addToHistory]);
+
   return (
     <div className="space-y-10">
       <div className="flex items-center">
@@ -47,6 +56,8 @@ const GuitarDetail: React.FC<Props> = ({ guitar, onAddToCart }) => {
           </Button>
         </div>
       </div>
+
+      <RecommendedList />
 
       <div className="space-y-6">
         <div>

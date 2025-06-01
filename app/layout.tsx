@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Be_Vietnam_Pro } from 'next/font/google';
 import { CartProvider } from '@/app/contexts/CartContext';
 import { FavoritesProvider } from '@/app/contexts/FavoriteContext';
+import { HistoryProvider } from '@/app/contexts/HistoryContext';
 
 import './globals.css';
 
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${beVietnamPro.variable} antialiased`}>
         <CartProvider>
-          <FavoritesProvider>{children}</FavoritesProvider>
+          <FavoritesProvider>
+            <HistoryProvider>{children}</HistoryProvider>
+          </FavoritesProvider>
         </CartProvider>
       </body>
     </html>

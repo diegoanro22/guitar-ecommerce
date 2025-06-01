@@ -1,4 +1,4 @@
-import type { Review, Guitar } from '@/app/types/product';
+import type { Review } from '@/app/types/product';
 
 export const calculateAverageRating = (reviews: Review[]): number => {
   if (reviews.length === 0) return 0;
@@ -21,27 +21,6 @@ export const updateNavigationHistory = (productId: number, limit = 10) => {
     const updated = [productId, ...history].slice(0, limit);
     localStorage.setItem('guitarNavigation', JSON.stringify(updated));
   }
-};
-
-export const getRecommendedGuitars = (
-  productList: Guitar[],
-  currentId: number,
-  limit: number,
-): Guitar[] => {
-  const history = JSON.parse(
-    localStorage.getItem('guitarNavigation') || '[]',
-  ) as number[];
-  const currentCategory = productList.find((p) => p.id === currentId)?.category;
-
-  const recommendations = productList
-    .filter(
-      (p) =>
-        p.id !== currentId &&
-        (history.includes(p.id) || p.category === currentCategory),
-    )
-    .sort(() => Math.random() - 0.5);
-
-  return recommendations.slice(0, limit);
 };
 
 export const calculateRatingDistribution = (reviews: Review[]) => {
