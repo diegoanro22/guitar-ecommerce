@@ -4,9 +4,11 @@ import React from 'react';
 import { useCart } from '@/app/contexts/CartContext';
 import CartItem from '@molecules/cart/CartItem';
 import { Button } from '@atoms/shared/ButtonCn';
+import { useCartTotal } from '@/app/hooks/useMemoCart';
 
 const CartList: React.FC = () => {
-  const { cart, clearCart, getTotal } = useCart();
+  const { cart, clearCart } = useCart();
+  const getTotal = useCartTotal();
 
   const hasItems = cart.length > 0;
 
@@ -25,8 +27,8 @@ const CartList: React.FC = () => {
       {hasItems && (
         <div className="mt-10 flex flex-col items-end gap-4">
           <div className="text-right">
-            <p className="text-lg font-semibold">Subtotal</p>
-            <p className="text-xl">${getTotal().toFixed(2)}</p>
+            <p className="text-lg font-semibold">Total</p>
+            <p className="text-xl">${getTotal.toFixed(2)}</p>
           </div>
 
           <div className="flex gap-4">
