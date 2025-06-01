@@ -40,16 +40,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const changeQuantity = (productId: number, amount: number) => {
-    setCart((prev) =>
-      prev.map((item) => {
-        if (item.id !== productId) return item;
-        const newQuantity = item.quantity + amount;
-        return {
-          ...item,
-          quantity: Math.max(1, Math.min(newQuantity, 9)),
-        };
-      }),
-    );
+    setCart((prev) => {
+      return prev
+        .map((item) => {
+          if (item.id !== productId) return item;
+          const newQuantity = item.quantity + amount;
+
+          // Si baja a 0 o menos, será filtrado abajo
+          if (newQuantity <= 0) return null;
+
+          return {
+            ...item,
+            quantity: Math.min(newQuantity, 9),
+          };
+        })
+        .filter((item): item is CartItem => item !== null);
+    });
   };
 
   const clearCart = () => setCart([]);

@@ -15,6 +15,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
   const { changeQuantity } = useCart();
   const subtotal =
     (item.price - (item.price * item.discount) / 100) * item.quantity;
+  if (item.quantity === 0) return null;
 
   return (
     <div className="flex items-center justify-between gap-4 border-b py-4">

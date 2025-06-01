@@ -5,27 +5,37 @@ import { useCart } from '@/app/contexts/CartContext';
 import CartItem from '@molecules/cart/CartItem';
 import { Button } from '@atoms/shared/ButtonCn';
 import { useCartTotal } from '@/app/hooks/useMemoCart';
+import { Alert, AlertDescription, AlertTitle } from '@atoms/shared/AlertCn';
 
 const CartList: React.FC = () => {
   const { cart, clearCart } = useCart();
   const getTotal = useCartTotal();
-
+  const flagTotal = getTotal > 999.99;
   const hasItems = cart.length > 0;
 
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-8">
-      <h2 className="mb-6 text-2xl font-bold">Your Cart</h2>
+      <h2 className="mb-6 text-2xl font-bold">Carrito</h2>
 
       <div className="space-y-6">
         {hasItems ? (
           cart.map((item) => <CartItem key={item.id} item={item} />)
         ) : (
-          <p className="text-gray-600">Your cart is empty.</p>
+          <p className="text-gray-600">El carrito está vacio</p>
         )}
       </div>
 
       {hasItems && (
         <div className="mt-10 flex flex-col items-end gap-4">
+          {flagTotal && (
+            <Alert variant="destructive" className="w-full max-w-md self-end">
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                El total del carrito no puede exceder <strong>$999.99</strong>
+                Reduce la cantidad de productos para continuar con la compra.
+              </AlertDescription>
+            </Alert>
+          )}
           <div className="text-right">
             <p className="text-lg font-semibold">Total</p>
             <p className="text-xl">${getTotal.toFixed(2)}</p>
@@ -39,7 +49,10 @@ const CartList: React.FC = () => {
             >
               Empty cart
             </Button>
-            <Button className="bg-orange-500 text-white hover:bg-orange-600">
+            <Button
+              disabled={flagTotal}
+              className="bg-primary text-white hover:bg-orange-600"
+            >
               Comprar
             </Button>
           </div>
