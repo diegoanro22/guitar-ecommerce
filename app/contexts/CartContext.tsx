@@ -24,6 +24,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCart((prev) => {
       const exists = prev.find((item) => item.id === product.id);
       if (exists) {
+        if (exists.quantity >= 9) return prev;
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
@@ -40,11 +41,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const changeQuantity = (productId: number, amount: number) => {
     setCart((prev) =>
-      prev.map((item) =>
-        item.id === productId
-          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
-          : item,
-      ),
+      prev.map((item) => {
+        if (item.id !== productId) return item;
+        const newQuantity = item.quantity + amount;
+        return {
+          ...item,
+          quantity: Math.max(1, Math.min(newQuantity, 9)),
+        };
+      }),
     );
   };
 
