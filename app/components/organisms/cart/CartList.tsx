@@ -5,7 +5,8 @@ import { useCart } from '@/app/contexts/CartContext';
 import CartItem from '@molecules/cart/CartItem';
 import { Button } from '@atoms/shared/ButtonCn';
 import { useCartTotal } from '@/app/hooks/useMemoCart';
-import { Alert, AlertDescription, AlertTitle } from '@atoms/shared/AlertCn';
+import SuccessDialog from '@atoms/cart/SuccessDialog';
+import ErrorAlert from '@atoms/cart/ErrorAlert';
 
 const CartList: React.FC = () => {
   const { cart, clearCart } = useCart();
@@ -27,15 +28,7 @@ const CartList: React.FC = () => {
 
       {hasItems && (
         <div className="mt-10 flex flex-col items-end gap-4">
-          {flagTotal && (
-            <Alert variant="destructive" className="w-full max-w-md self-end">
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>
-                El total del carrito no puede exceder <strong>$999.99</strong>
-                Reduce la cantidad de productos para continuar con la compra.
-              </AlertDescription>
-            </Alert>
-          )}
+          {flagTotal && <ErrorAlert />}
           <div className="text-right">
             <p className="text-lg font-semibold">Total</p>
             <p className="text-xl">${getTotal.toFixed(2)}</p>
@@ -49,12 +42,7 @@ const CartList: React.FC = () => {
             >
               Empty cart
             </Button>
-            <Button
-              disabled={flagTotal}
-              className="bg-primary text-white hover:bg-orange-600"
-            >
-              Comprar
-            </Button>
+            <SuccessDialog onConfirm={clearCart} disabled={flagTotal} />
           </div>
         </div>
       )}
