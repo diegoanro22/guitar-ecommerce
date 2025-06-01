@@ -19,7 +19,11 @@ const CartItem: React.FC<Props> = ({ item }) => {
   return (
     <div className="flex items-center justify-between gap-4 border-b py-4">
       <div className="flex items-center gap-4">
-        <ProductImage src={item.image} alt={item.name} />
+        <ProductImage
+          src={item.image}
+          alt={item.name}
+          className="h-24 w-full rounded-md object-cover"
+        />
         <div>
           <h4 className="text-sm font-semibold text-gray-900">{item.name}</h4>
           <p className="text-sm text-gray-500">
