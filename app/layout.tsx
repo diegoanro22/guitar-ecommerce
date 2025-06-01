@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Be_Vietnam_Pro } from 'next/font/google';
-import { CartProvider } from '@/app/utils/CartContext';
+import { CartProvider } from '@/app/contexts/CartContext';
 
 import './globals.css';
 

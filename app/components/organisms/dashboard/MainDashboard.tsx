@@ -3,7 +3,7 @@ import React from 'react';
 import GuitarList from '@organisms/dashboard/GuitarList';
 import { guitars } from '@/app/data/guitars';
 import type { Guitar } from '@/app/types/product';
-import { useCart } from '@/app/utils/CartContext';
+import { useCart } from '@/app/contexts/CartContext';
 
 export default function MainDashboard() {
   const { addToCart } = useCart();

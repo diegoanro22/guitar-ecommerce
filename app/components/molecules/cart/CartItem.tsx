@@ -5,7 +5,7 @@ import type { CartItem as CartItemType } from '@/app/types/product';
 import ProductImage from '@atoms/dashboard/ProductImage';
 import { Button } from '@atoms/shared/ButtonCn';
 import { Minus, Plus } from 'lucide-react';
-import { useCart } from '@/app/utils/CartContext';
+import { useCart } from '@/app/contexts/CartContext';
 
 interface Props {
   item: CartItemType;

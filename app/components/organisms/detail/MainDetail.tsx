@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import GuitarDetail from '@organisms/detail/GuitarDetail';
 import { guitars } from '@/app/data/guitars';
 import type { Guitar } from '@/app/types/product';
-import { useCart } from '@/app/utils/CartContext';
+import { useCart } from '@/app/contexts/CartContext';
 
 export default function MainDetail() {
   const { id } = useParams();

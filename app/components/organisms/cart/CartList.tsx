@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useCart } from '@/app/utils/CartContext';
+import { useCart } from '@/app/contexts/CartContext';
 import CartItem from '@molecules/cart/CartItem';
 import { Button } from '@atoms/shared/ButtonCn';
 
