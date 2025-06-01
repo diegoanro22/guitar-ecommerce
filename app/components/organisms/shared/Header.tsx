@@ -4,6 +4,7 @@ import { Button } from '@atoms/shared/ButtonCn';
 import { Guitar, ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCartCount } from '@/app/hooks/useMemoCart';
+import { FavoritesDrawer } from '@molecules/dashboard/FavoriteDrawer';
 
 export default function Header() {
   const router = useRouter();
@@ -21,21 +22,25 @@ export default function Header() {
       <div className="flex items-center gap-4">
         <HeaderSearchInput />
 
-        <div className="relative">
-          <Button
-            size="icon"
-            variant="ghost"
-            aria-label="Ver carrito"
-            title="Ver carrito"
-            onClick={() => router.push('/cart')}
-          >
-            <ShoppingCart className="h-5 w-5" />
-          </Button>
-          {totalCartItems > 0 && (
-            <span className="bg-secondary absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold text-white">
-              {totalCartItems}
-            </span>
-          )}
+        <div className="relative flex items-center gap-2">
+          <FavoritesDrawer />
+
+          <div className="relative">
+            <Button
+              size="icon"
+              variant="ghost"
+              aria-label="Ver carrito"
+              title="Ver carrito"
+              onClick={() => router.push('/cart')}
+            >
+              <ShoppingCart className="h-5 w-5" />
+            </Button>
+            {totalCartItems > 0 && (
+              <span className="bg-secondary absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold text-white">
+                {totalCartItems}
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </header>

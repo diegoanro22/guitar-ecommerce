@@ -13,6 +13,8 @@ import PriceDisplay from '@atoms/dashboard/PriceDisplay';
 import { Button } from '@atoms/shared/ButtonCn';
 import type { Guitar } from '@/app/types/product';
 import { useRouter } from 'next/navigation';
+import { Heart } from 'lucide-react';
+import { useFavorites } from '@/app/contexts/FavoriteContext';
 
 interface GuitarCardProps {
   guitar: Guitar;
@@ -21,13 +23,29 @@ interface GuitarCardProps {
 
 const GuitarCard: React.FC<GuitarCardProps> = ({ guitar, onAddToCart }) => {
   const router = useRouter();
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const liked = isFavorite(guitar.id);
+
   return (
     <Card
       className="mx-auto w-full max-w-sm bg-white transition-shadow duration-300 hover:shadow-lg"
       onClick={() => router.push(`/guitar/${guitar.id}`)}
     >
-      <CardHeader className="p-4">
+      <CardHeader className="relative p-4">
         <ProductImage src={guitar.image} alt={guitar.name} />
+        <Button
+          size="icon"
+          variant="ghost"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleFavorite(guitar);
+          }}
+          className="absolute top-4 right-4"
+        >
+          <Heart
+            className={liked ? 'fill-red-500 text-red-500' : 'text-muted'}
+          />
+        </Button>
         <CardTitle className="text-lg font-semibold text-gray-900">
           {guitar.name}
         </CardTitle>

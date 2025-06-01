@@ -21,10 +21,3 @@ export interface Guitar {
 export interface CartItem extends Guitar {
   quantity: number;
 }
-
-export interface AppContextType {
-  favorites: Guitar[];
-  productList: Guitar[];
-  addReview: (productId: number, newReview: Review) => void;
-  toggleFavorite: (productId: number) => void;
-}
