@@ -1,5 +1,4 @@
 'use client';
-import { HeaderSearchInput } from '@atoms/dashboard/InputHeader';
 import { Button } from '@atoms/shared/ButtonCn';
 import { Guitar, ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -20,8 +19,6 @@ export default function Header() {
         GuitarMania
       </div>
       <div className="flex items-center gap-4">
-        <HeaderSearchInput />
-
         <div className="relative flex items-center gap-2">
           <FavoritesDrawer />
 
